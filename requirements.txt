@@ -1,0 +1,8 @@
+tqdm
+wandb
+hydra-core
+numpy==1.24.3 # Required for compatibility with torch_geometric
+torch
+torch_geometric
+toponetx
+ogb 

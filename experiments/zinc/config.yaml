@@ -1,0 +1,49 @@
+# Training
+seed: 1
+number_of_epochs: 2000
+batch_size: 128
+lr_stop_criterion: 0.000005
+budget: 500000
+
+optimizer:
+  _target_: torch.optim.Adam
+  lr: 0.001
+
+lr_scheduler:
+  _target_: torch.optim.lr_scheduler.StepLR
+  step_size: 300
+  gamma: 0.5
+
+device: cuda
+
+# Wandb
+wandb:
+  project_name: smcn
+  prefix: zinc
+  log: False
+
+# Architecture
+arch:
+  model_type: subcomplex
+  cin_embedding_dim: 85
+  subgraph_embedding_dim: 70
+  number_of_top_cin_layers: 1
+  number_of_bottom_cin_layers: 0
+  number_of_sub_complex_layers: 5
+  max_output_rank: 1
+  add_residual: False
+  use_second_conv: False
+  second_conv_type: id
+  number_of_mlp_layers: 2
+  dropout: 0.0
+
+# Dataset
+dataset_root: datasets/subcomplex_zinc
+zinc_root: datasets/zinc
+construct_complexes: True
+min_len: 3  # for cyclic lift
+max_len:  18  # for cyclic lift
+use_subcomplex_features:  True
+subcomplex_low_rank:  0
+subcomplex_high_rank:  1
+num_workers: 4

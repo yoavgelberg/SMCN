@@ -1,0 +1,52 @@
+# Training
+seed: 1
+number_of_epochs: 200
+batch_size: 128
+
+optimizer:
+  _target_: torch.optim.Adam
+  lr: 0.0001
+  weight_decay: 0.0
+
+device: cuda
+
+# Wandb
+wandb:
+  project_name: smcn
+  prefix: molesol
+  log: False
+
+# Architecture
+arch:
+  # generic
+  activation: relu
+  residual: True
+  embedding_dim: 64
+  model_type: subcomplex
+  number_cin_layers: 2
+  number_subgraph_layers: 2
+  output_ranks:  [0,1,2]
+  number_of_mlp_layers: 2
+  dropout: 0.5
+  final_dropout: 0.5
+  in_dropout: 0.0
+
+  # ensemble subgraphs
+  embedding_dim_cin: 16
+  embedding_dim_subgraphs: 228
+  residual_cin: False
+  residual_subgraph: False
+  dropout_cin: 0.0
+  dropout_subgraph: 0.0
+  output_ranks_subgraphs: [0,1]
+
+# Dataset
+dataset_root: datasets/subcomplex_molesol
+original_root: datasets/molesol
+construct_complexes: True
+min_len: 3  # for cyclic lift
+max_len:  6  # for cyclic lift
+use_subcomplex_features:  True
+subcomplex_low_rank:  0
+subcomplex_high_rank:  1
+num_workers: 4

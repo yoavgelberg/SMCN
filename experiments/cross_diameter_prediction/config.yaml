@@ -1,0 +1,56 @@
+# Training
+seed: 1
+number_of_epochs: 200
+batch_size: 128
+target_name: cross_diameter_normalized
+
+optimizer:
+  _target_: torch.optim.Adam
+  lr: 0.0001
+  weight_decay: 0.0
+
+lr_scheduler:
+  _target_: torch.optim.lr_scheduler.StepLR
+  step_size: 100
+  gamma: 0.5
+
+device: cuda
+
+# Wandb
+wandb:
+  project_name: smcn
+  prefix: cross-diameter-zinc
+  log: False
+
+# Architecture
+arch:
+  # generic
+  activation: relu
+  residual: False
+  embedding_dim: 72
+  model_type: "subcomplex"
+  output_ranks: [ 0, 2 ]
+  number_of_mlp_layers: 2
+  dropout: 0.0
+  final_dropout: 0.0
+  in_dropout: 0.0
+
+  # subcomplex
+  number_cin_layers_first: 1
+  number_subgraph_layers: 4
+  number_cin_layers_last: 1
+
+  # homp
+  number_of_layers: 4
+
+# Dataset
+dataset_root: datasets/cross_diameter_prediction_zinc
+original_root: datasets/zinc
+zinc_subset: True
+construct_complexes: True
+min_len: 3  # for cyclic lift
+max_len:  18 # for cyclic lift
+use_subcomplex_features: True
+subcomplex_low_rank:  0
+subcomplex_high_rank:  2
+num_workers: 4

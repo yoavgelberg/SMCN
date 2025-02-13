@@ -1,0 +1,46 @@
+# Dataset construction
+number_of_permuted_copies: 32
+min_size: 18
+max_size: 40
+num_components: 3
+first_element_of_pair: True
+low_rk: 0
+high_rk: 1
+root_first_element_dataset: ./torus_dataset_first
+root_second_element_dataset: ./torus_dataset_second
+
+# Evaluation
+margin: 0.0
+num_epochs: 20
+device: cuda
+threshold: 60.0
+epsilon_cmp:  1e-6
+epsilon_matrix:  1e-7
+learning_rate:  5e-4
+output_dim: 4
+
+# Model generic
+model_type: "subcomplex"
+embedding_dim: 100
+number_of_mlp_layers: 2
+
+# Subcomplex model:
+number_cin_layers_for_subcomplex: 1
+number_subgraph_layers: 2
+
+# HOMP model
+number_cin_layers_for_homp: 3
+
+arch:
+  # generic
+  model_type: subcomplex
+  embedding_dim: 100
+  number_of_mlp_layers: 2
+
+  # subcomplex model
+  number_cin_layers_for_subcomplex: 1
+  number_subgraph_layers: 2
+  subcomplex_high_rank: 1
+
+  # homp model
+  number_cin_layers_for_homp: 3
